@@ -733,7 +733,7 @@ function importRefreshIndicator() {
  */
 function buildCard(index, item, apiClient, options) {
     const action = resolveAction({
-        defaultAction: options.action || ItemAction.Link,
+        defaultAction: ItemAction.Link,
         isFolder: item.IsFolder,
         isPhoto: item.MediaType === 'Photo'
     });
