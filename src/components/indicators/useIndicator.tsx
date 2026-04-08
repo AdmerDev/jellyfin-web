@@ -65,7 +65,7 @@ const enablePlayedIndicator = (item: ItemDto) => {
 };
 
 const formatCountIndicator = (count: number) => {
-    return count >= 100 ? '99+' : count.toString();
+    return count.toString();
 };
 
 const useIndicator = (item: ItemDto) => {
