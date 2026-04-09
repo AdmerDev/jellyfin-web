@@ -99,7 +99,7 @@ export function getChildCountIndicatorHtml(item, options) {
 }
 
 function formatCountIndicator(count) {
-    return count >= 100 ? '99+' : count.toString();
+    return count.toString();
 }
 
 export function getTimerIndicator(item) {
