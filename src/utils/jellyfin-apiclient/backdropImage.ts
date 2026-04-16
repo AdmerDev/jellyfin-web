@@ -33,14 +33,14 @@ export const getItemBackdropImageUrl = (apiClient: ApiClient, item: BaseItemDto,
             tag: item.BackdropImageTags[backdropImgIndex],
             ...options
         });
-    } else if (item.ParentBackdropItemId && item.ParentBackdropImageTags?.length) {
+    /* } else if (item.ParentBackdropItemId && item.ParentBackdropImageTags?.length) {
         const backdropImgIndex = random ? randomInt(0, item.ParentBackdropImageTags.length - 1) : 0;
         return apiClient.getScaledImageUrl(item.ParentBackdropItemId, {
             type: ImageType.Backdrop,
             index: backdropImgIndex,
             tag: item.ParentBackdropImageTags[backdropImgIndex],
             ...options
-        });
+        }); */
     } else if (item.Id && item.ImageTags?.Primary) {
         return apiClient.getScaledImageUrl(item.Id, {
             type: ImageType.Primary,
