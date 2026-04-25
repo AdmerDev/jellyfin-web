@@ -176,15 +176,26 @@ function getItemImageUrls(item, imageOptions) {
         });
     }
 
+    // This if statement uses the episode's primary image as the backdrop.
+    // It also uses the season's primary image as the backdrop.
     if (item.ParentBackdropItemId && item.ParentBackdropImageTags?.length) {
         return item.ParentBackdropImageTags.map((imgTag, index) => {
-            return apiClient.getScaledImageUrl(item.ParentBackdropItemId, Object.assign(imageOptions, {
-                type: 'Backdrop',
+            return apiClient.getScaledImageUrl(item.Id, Object.assign(imageOptions, {
+                type: 'Primary',
                 tag: imgTag,
                 maxWidth: dom.getScreenWidth(),
                 index: index
             }));
         });
+    }
+
+    // Use primary image as fallback for movies/shows without backdrop
+    if (item.ImageTags && item.ImageTags.Primary) {
+        return [apiClient.getScaledImageUrl(item.Id, Object.assign(imageOptions, {
+            type: 'Primary',
+            tag: item.ImageTags.Primary,
+            maxWidth: dom.getScreenWidth()
+        }))];
     }
 
     return [];
@@ -217,8 +228,6 @@ export function setBackdrops(items, imageOptions, isEnabled = false) {
 
         if (images.length) {
             setBackdropImages(images);
-        } else {
-            clearBackdrop();
         }
     }
 }
