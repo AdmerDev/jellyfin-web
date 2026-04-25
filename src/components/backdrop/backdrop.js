@@ -176,8 +176,13 @@ function getItemImageUrls(item, imageOptions) {
         });
     }
 
+    // Remove item backdrop for people and books
+    if (item.Type === 'Person' || item.Type === 'Book') {
+        clearBackdrop();
+    }
+
     // Use primary image as fallback for movies/shows without backdrop
-    if (item.ImageTags && item.ImageTags.Primary) {
+    if (item.ImageTags && item.ImageTags.Primary && item.Type !== 'Person' && item.Type !== 'Book') {
         return [apiClient.getScaledImageUrl(item.Id, Object.assign(imageOptions, {
             type: 'Primary',
             tag: item.ImageTags.Primary,
