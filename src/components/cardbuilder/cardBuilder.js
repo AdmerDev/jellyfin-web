@@ -480,6 +480,19 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
 
         if (options.showYear || options.showSeriesYear) {
             const productionYear = item.ProductionYear && datetime.toLocaleString(item.ProductionYear, { useGrouping: false });
+            const showRunTime = datetime.getDisplayRunningTime(item.RunTimeTicks);
+            const displayProductionYear = '(' + productionYear + ')';
+            const productionYearAndRunTime = displayProductionYear + ' ' + showRunTime;
+            let displayText = null;
+            if (productionYear && showRunTime) {
+                displayText = productionYearAndRunTime;
+            } else if (productionYear && showRunTime == 'NaN:NaN') {
+                displayText = productionYear;
+            } else if (!productionYear && showRunTime != 'NaN:NaN') {
+                displayText = showRunTime;
+            } else {
+                displayText = '';
+            }
             if (item.Type === 'Series') {
                 if (item.Status === 'Continuing') {
                     lines.push(globalize.translate('SeriesYearToPresent', productionYear || ''));
@@ -490,7 +503,7 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
                     lines.push(productionYear || '');
                 }
             } else {
-                lines.push(productionYear || '');
+                lines.push(displayText);
             }
         }
 
