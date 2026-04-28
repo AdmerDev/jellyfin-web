@@ -484,10 +484,10 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
             const displayProductionYear = '(' + productionYear + ')';
             const productionYearAndRunTime = displayProductionYear + ' ' + showRunTime;
             let displayText = null;
-            if (productionYear && showRunTime) {
-                displayText = productionYearAndRunTime;
-            } else if (productionYear && showRunTime == 'NaN:NaN') {
+            if (productionYear && showRunTime == 'NaN:NaN') {
                 displayText = productionYear;
+            } else if (productionYear && showRunTime) {
+                displayText = productionYearAndRunTime;
             } else if (!productionYear && showRunTime != 'NaN:NaN') {
                 displayText = showRunTime;
             } else {
@@ -502,6 +502,8 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
                 } else {
                     lines.push(productionYear || '');
                 }
+            } else if (item.Type === 'CollectionFolder') {
+                lines.push(productionYear || '');
             } else {
                 lines.push(displayText);
             }
