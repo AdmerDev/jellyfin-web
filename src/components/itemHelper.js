@@ -7,6 +7,7 @@ import { getPlaylistsApi } from '@jellyfin/sdk/lib/utils/api/playlists-api';
 
 import { appHost } from './apphost';
 import { AppFeature } from 'constants/appFeature';
+import datetime from 'scripts/datetime';
 import globalize from 'lib/globalize';
 import { ServerConnections } from 'lib/jellyfin-apiclient';
 import { toApi } from 'utils/jellyfin-apiclient/compat';
@@ -31,6 +32,8 @@ export function getDisplayName(item, options = {}) {
     if (item.Type === 'Episode' && item.ParentIndexNumber === 0) {
         name = globalize.translate('ValueSpecialEpisodeName', name);
     } else if ((item.Type === 'Episode' || item.Type === 'Program' || item.Type === 'Recording') && item.IndexNumber != null && item.ParentIndexNumber != null && options.includeIndexNumber !== false) {
+        const showRunTime = datetime.getDisplayRunningTime(item.RunTimeTicks);
+        let displayRunTime = '';
         let displayIndexNumber = item.IndexNumber;
 
         let number = displayIndexNumber;
@@ -47,8 +50,12 @@ export function getDisplayName(item, options = {}) {
             number += '-' + displayIndexNumber;
         }
 
+        if (nameSeparator == ' - ') {
+            displayRunTime = nameSeparator + showRunTime;
+        }
+
         if (number) {
-            name = name ? (number + nameSeparator + name) : number;
+            name = name ? (number + nameSeparator + name + displayRunTime) : number;
         }
     }
 
