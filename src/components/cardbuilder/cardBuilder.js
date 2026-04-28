@@ -502,8 +502,6 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
                 } else {
                     lines.push(productionYear || '');
                 }
-            } else if (item.Type === 'CollectionFolder') {
-                lines.push(productionYear || '');
             } else {
                 lines.push(displayText);
             }
