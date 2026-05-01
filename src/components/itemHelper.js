@@ -50,7 +50,7 @@ export function getDisplayName(item, options = {}) {
             number += '-' + displayIndexNumber;
         }
 
-        if (nameSeparator == ' - ') {
+        if (nameSeparator == ' - ' && showRunTime != 'NaN:NaN') {
             displayRunTime = nameSeparator + showRunTime;
         }
 
