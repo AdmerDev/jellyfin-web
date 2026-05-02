@@ -507,7 +507,7 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
             }
         }
 
-        if (options.showRuntime) {
+        if (item.Type != 'Movie' && item.Type != 'Series' && options.showRunTime != 'NaN:NaN') {
             if (item.RunTimeTicks) {
                 lines.push(datetime.getDisplayRunningTime(item.RunTimeTicks));
             } else {
