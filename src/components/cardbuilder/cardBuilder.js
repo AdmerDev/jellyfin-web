@@ -478,14 +478,14 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
             }
         }
 
-        if (options.showYear || options.showSeriesYear) {
+        if (options.showYear || options.showSeriesYear || item.Type === 'Movie' || item.Type != 'Series') {
             const productionYear = item.ProductionYear && datetime.toLocaleString(item.ProductionYear, { useGrouping: false });
             const showRunTime = datetime.getDisplayRunningTime(item.RunTimeTicks);
             const displayProductionYear = '(' + productionYear + ')';
             const productionYearAndRunTime = displayProductionYear + ' ' + showRunTime;
             let displayText = null;
-            if (productionYear && showRunTime == 'NaN:NaN') {
-                displayText = productionYear;
+            if (productionYear && showRunTime === 'NaN:NaN') {
+                displayText = displayProductionYear;
             } else if (productionYear && showRunTime) {
                 displayText = productionYearAndRunTime;
             } else if (!productionYear && showRunTime != 'NaN:NaN') {
@@ -504,14 +504,6 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
                 }
             } else {
                 lines.push(displayText);
-            }
-        }
-
-        if (options.showRuntime) {
-            if (item.RunTimeTicks) {
-                lines.push(datetime.getDisplayRunningTime(item.RunTimeTicks));
-            } else {
-                lines.push('');
             }
         }
 
