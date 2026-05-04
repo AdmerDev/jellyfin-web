@@ -32,8 +32,6 @@ export function getDisplayName(item, options = {}) {
     if (item.Type === 'Episode' && item.ParentIndexNumber === 0) {
         name = globalize.translate('ValueSpecialEpisodeName', name);
     } else if ((item.Type === 'Episode' || item.Type === 'Program' || item.Type === 'Recording') && item.IndexNumber != null && item.ParentIndexNumber != null && options.includeIndexNumber !== false) {
-        const showRunTime = datetime.getDisplayRunningTime(item.RunTimeTicks);
-        let displayRunTime = '';
         let displayIndexNumber = item.IndexNumber;
 
         let number = displayIndexNumber;
@@ -50,12 +48,8 @@ export function getDisplayName(item, options = {}) {
             number += '-' + displayIndexNumber;
         }
 
-        if (nameSeparator == ' - ' && showRunTime != 'NaN:NaN') {
-            displayRunTime = nameSeparator + showRunTime;
-        }
-
         if (number) {
-            name = name ? (number + nameSeparator + name + displayRunTime) : number;
+            name = name ? (number + nameSeparator + name) : number;
         }
     }
 

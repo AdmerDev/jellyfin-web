@@ -529,7 +529,7 @@ class ItemsView {
             let preferLogo;
             let defaultShape;
             const item = self.currentItem;
-            let lines = settings.showTitle ? 2 : 0;
+            let lines = settings.showTitle ? 3 : 0;
 
             if (settings.imageType === 'banner') {
                 shape = 'banner';
