@@ -79,7 +79,7 @@ function getLatestItemsHtmlFn(
             showTitle: viewType !== 'photos',
             showYear: viewType === 'movies' || viewType === 'tvshows' || !viewType,
             showParentTitle: viewType === 'music' || viewType === 'tvshows' || !viewType || (cardLayout && (viewType === 'tvshows')),
-            lines: 2
+            lines: 3
         });
     };
 }

@@ -64,7 +64,7 @@ function getItemsToResumeHtmlFn(
             allowBottomPadding: false,
             cardLayout: cardLayout,
             showYear: true,
-            lines: 2
+            lines: 3
         });
     };
 }
